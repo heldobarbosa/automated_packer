@@ -38,6 +38,6 @@
       "../ansible/roles/PHP"
       "../ansible/roles/WORDPRESS"
       "../ansible/roles/DATABASE_FOR_WORDPRESS"
-      "../CONF_FOR_NGINX"
+      "../ansible/roles/CONF_FOR_NGINX"
     ]
   }
