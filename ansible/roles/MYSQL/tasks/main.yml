@@ -1,0 +1,16 @@
+---
+# tasks file for MYSQL
+- name: INSTALL MYSQL
+  yum:
+    name: mariadb-server
+    state: latest
+
+- name: CREATE MYSQL CONFIGURATION FILE
+  template: src=my.cnf.j2 dest=/etc/my.cnf
+  notify: restart mariadb
+
+- name: CREATE MARIADB LOGFILE
+  file: path=/var/log/mysqld.log state=touch owner=mysql group=mysql mode=0775
+
+- name: START MARIADB SERVICE
+  service: name=mariadb state=started enabled=yes

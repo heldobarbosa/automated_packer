@@ -1,0 +1,75 @@
+---
+# tasks file for PHP
+    - name: INSTALL remi 7
+      yum:
+        name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+        state: latest
+
+    - name: ENABLE remi 7
+      shell: sudo yum-config-manager --enable remi-php73
+
+    - name: INSTALL php7.3
+      yum:
+        name: php
+        state: latest
+
+    - name: INSTALL PHP
+      yum:
+        name: php-fpm
+        state: latest
+
+    - name: INSTALL [php-common]
+      yum:
+        name: php-common
+        state: latest
+
+    - name: INSTALL [php-mysql]
+      yum:
+        name: php-mysql
+        state: latest
+
+    - name: INSTALL [php-gd]
+      yum:
+        name: php-gd
+        state: latest
+
+    - name: INSTALL [php-xml]
+      yum:
+        name: php-xml
+        state: latest
+
+    - name: INSTALL [php-mbstring]
+      yum:
+        name: php-mbstring
+        state: latest
+
+    - name: INSTALL [php-mcrypt]
+      yum:
+        name: php-mcrypt
+        state: latest
+
+    - name: RESTART Daeler
+      service:
+        name: daemon_reload
+
+    - name: START Nginx
+      shell: sudo systemctl start nginx
+
+    - name: START Mysqld
+      shell: sudo systemctl start mariadb
+
+    #- name: Criando pasta PHP
+    #  command: rm -rf /var/run/php && mkdir /var/run/php && chmod 755 /var/run/php
+    #  notify: restart php-fpm
+
+    - name: DISABLE DEFAULT POOL
+      command: mv /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.disabled creates=/etc/php-fpm.d/www.disabled
+      notify: restart php-fpm
+
+    - name: COPY php-fpm CONFIGURATION
+      template: src=www.conf dest=/etc/php-fpm.d/
+      notify: restart php-fpm
+
+    - name: CREATE /VAR/RUN/PHP > SOCK
+      shell: rm -rf /var/run/php && mkdir /var/run/php && chmod 755 /var/run/php
+      notify: restart php-fpm

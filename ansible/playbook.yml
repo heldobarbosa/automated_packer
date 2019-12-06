@@ -1,0 +1,15 @@
+---
+  - hosts: centos
+    #sudo: True
+    user: centos
+    tasks:
+    become: true
+   
+    roles:
+    - UPDATE
+    - NGINX
+    - WGET
+    - MYSQL
+    - PHP
+    - WORDPRESS
+    - CONF_FOR_NGINX

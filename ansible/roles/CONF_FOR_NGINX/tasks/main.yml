@@ -1,0 +1,7 @@
+---
+# tasks file for .CONF_FOR_NGINX
+- name: COPY NGINX config file
+  template: src=wordpress.conf dest=/etc/nginx/conf.d/wordpress.conf
+
+- name: RESTART NGINX
+  shell: sudo systemctl restart nginx

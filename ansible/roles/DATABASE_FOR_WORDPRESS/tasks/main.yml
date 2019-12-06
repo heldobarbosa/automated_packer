@@ -1,0 +1,25 @@
+---
+# tasks file for DATABASE_FOR_WORDPRESS
+- name: INSTALL PYTHON-PIP
+      yum:
+        name: python-pip
+        state: latest
+
+- name: MAKE SURE PYMYSQL IS PRESENT
+  become: true # needed if the other tasks are not played as root
+  pip:
+    name: pymysql
+    state: present
+
+- name: CREATE WORDPRESS DATABASE
+  mysql_db:
+    name: wordpress
+    state: present
+
+- name: CREATE DATABASE USER
+  mysql_user:
+    name: wordpress_user
+    password: wordpress_pass
+    priv: wordpress.*:ALL
+    host: "localhost"
+    state: present

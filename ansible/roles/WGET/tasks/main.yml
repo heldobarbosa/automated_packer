@@ -1,0 +1,6 @@
+---
+# tasks file for WGET
+- name: INSTALL WGET
+  yum:
+    name: wget
+    state: latest

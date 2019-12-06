@@ -1,0 +1,8 @@
+---
+# tasks file for UPDATE
+- name: PACKAGES
+  shell: sudo yum -y update
+- name: "Instalar pre-requisitos [NGINX]"
+  yum:
+    name: epel-release
+    state: latest

@@ -1,0 +1,5 @@
+---
+# handlers file for WORDPRESS
+- name: "DISABLED SELinux"
+  selinux:
+          state: disabled

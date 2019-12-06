@@ -1,0 +1,19 @@
+---
+# tasks file for NGINX
+- name: Adicionando grupo nginx
+  group:
+    name: nginx
+- name: Adicionando usuário nginx
+  user:
+    name: nginx
+    group: nginx
+
+- name: INSTALL NGINX
+  yum: name=nginx state=latest
+
+#- name: COPY NGINX CONFIGURATION FOR WORDPRESS
+#  template: src=default.conf dest=/etc/nginx/conf.d/default.conf
+#  notify: restart nginx
+
+#- name: HTTP SERVICE STATE
+#  service: name=nginx state=started enabled=yes
