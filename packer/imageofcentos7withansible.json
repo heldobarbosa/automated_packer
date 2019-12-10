@@ -1,43 +1,49 @@
 {
-  "variables": {
-    "aws_access_key": "",
-    "aws_secret_key": ""
+  "variables":{
+     "aws_access_key":"AKIATF6B7PFECSM72MHD",
+     "aws_secret_key":"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"
   },
-  "builders": [{
-    "type": "amazon-ebs",
-    "access_key": "{{user `aws_access_key`}}",
-    "secret_key": "{{user `aws_secret_key`}}",
-    "region": "us-east-1",
-    "source_ami_filter": {
-      "filters": {
-        "virtualization-type": "hvm",
-        "name": "*CentOS Linux 7 x86_64 HVM EBS*",
-        "root-device-type": "ebs"
-      },
-      "owners": ["679593333241"],
-      "most_recent": true
-    },
-    "instance_type": "t2.micro",
-    "ssh_username": "centos",
-    "ami_name": "instance_of_packer {{timestamp}}"
-  }],
-"_comment": "Ruuning Ansible roles on the image",
-"provisioners": [
-  {
-    "type": "shell",
-    "script": "scripts/ansible.sh"
-  },
-  {
-    "type": "ansible-local",
-    "playbook_file": "/ansible/playbook.yml",
-    "role_paths": [
-      "../ansible/roles/UPDATE"
-      "../ansible/roles/NGINX"
-      "../ansible/roles/WGET"
-      "../ansible/roles/MYSQL"
-      "../ansible/roles/PHP"
-      "../ansible/roles/WORDPRESS"
-      "../ansible/roles/DATABASE_FOR_WORDPRESS"
-      "../ansible/roles/CONF_FOR_NGINX"
-    ]
-  }
+  "builders":[
+     {
+        "type":"amazon-ebs",
+        "access_key":"{{user `aws_access_key`}}",
+        "secret_key":"{{user `aws_secret_key`}}",
+        "region":"us-east-1",
+        "source_ami_filter":{
+           "filters":{
+              "virtualization-type":"hvm",
+              "name":"*CentOS Linux 7 x86_64 HVM EBS*",
+              "root-device-type":"ebs"
+           },
+           "owners":[
+              "679593333241"
+           ],
+           "most_recent":true
+        },
+        "instance_type":"t2.micro",
+        "ssh_username":"centos",
+        "ami_name":"instance_of_packer {{timestamp}}"
+     }
+  ],
+  "_comment":"Ruuning Ansible roles on the image",
+  "provisioners":[
+     {
+        "type":"shell",
+        "script":"Scripts/ansible.sh"
+     },
+     {
+        "type":"ansible-local",
+        "playbook_file":"/home/heldo/Documentos/Desafio/True/automated_wordpress/playbook.yml",
+        "role_paths":[
+           "../ansible/roles/UPDATE",
+           "../ansible/roles/NGINX",
+           "../ansible/roles/WGET",
+           "../ansible/roles/MYSQL",
+           "../ansible/roles/PHP",
+           "../ansible/roles/WORDPRESS",
+           "../ansible/roles/DATABASE_FOR_WORDPRESS",
+           "../ansible/roles/CONF_FOR_NGINX"
+        ]
+     }
+  ]
+}

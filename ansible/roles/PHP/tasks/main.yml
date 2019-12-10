@@ -11,52 +11,89 @@
     - name: INSTALL php7.3
       yum:
         name: php
-        state: latest
+        state: present
 
     - name: INSTALL PHP
       yum:
         name: php-fpm
-        state: latest
+        state: present
 
     - name: INSTALL [php-common]
       yum:
         name: php-common
-        state: latest
+        state: present
 
     - name: INSTALL [php-mysql]
       yum:
         name: php-mysql
-        state: latest
+        state: present
 
     - name: INSTALL [php-gd]
       yum:
         name: php-gd
-        state: latest
+        state: present
 
     - name: INSTALL [php-xml]
       yum:
         name: php-xml
-        state: latest
+        state: present
 
     - name: INSTALL [php-mbstring]
       yum:
         name: php-mbstring
-        state: latest
+        state: present
 
     - name: INSTALL [php-mcrypt]
       yum:
         name: php-mcrypt
-        state: latest
+        state: present
+
+    - name: INSTALL [php-opcache]
+      yum:
+        name: php-opcache
+        state: present
+
+    - name: INSTALL [php-pecl-apcu]
+      yum:
+        name: php-pecl-apcu
+        state: present
+
+    - name: INSTALL [php-cli]
+      yum:
+        name: php-cli
+        state: present
+
+    - name: INSTALL [php-pear]
+      yum:
+        name: php-pear
+        state: present
+
+    - name: INSTALL [php-pdo]
+      yum:
+        name: php-pdo
+        state: present
+
+    - name: INSTALL [mysqlnd]
+      yum:
+        name: php-mysqlnd
+        state: present
+
+    - name: INSTALL [pgsql]
+      yum:
+        name: php-pgsql
+        state: present
 
     - name: RESTART Daeler
       service:
         name: daemon_reload
 
-    - name: START Nginx
-      shell: sudo systemctl start nginx
+#- name: RESTART NGINX
+#  shell: sudo systemctl restart nginx
+#  - name: START Nginx
+#      shell: sudo systemctl start nginx
 
-    - name: START Mysqld
-      shell: sudo systemctl start mariadb
+#    - name: START Mysqld
+#      shell: sudo systemctl start mariadb
 
     #- name: Criando pasta PHP
     #  command: rm -rf /var/run/php && mkdir /var/run/php && chmod 755 /var/run/php
@@ -71,5 +108,7 @@
       notify: restart php-fpm
 
     - name: CREATE /VAR/RUN/PHP > SOCK
-      shell: rm -rf /var/run/php && mkdir /var/run/php && chmod 755 /var/run/php
-      notify: restart php-fpm
+#      shell: rm -rf /var/run/php
+      shell: cd /run && mkdir php && chmod 755 php
+#      shell: cd /run && mkdir php && chmod 755 /run/php
+#      notify: restart php-fpm

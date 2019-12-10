@@ -1,3 +1,3 @@
 ---
 # defaults file for NGINX
-server_hostname: blog-heldo.team42.tk
+server_hostname: server_name

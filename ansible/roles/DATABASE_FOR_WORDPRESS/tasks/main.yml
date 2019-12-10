@@ -1,9 +1,9 @@
 ---
 # tasks file for DATABASE_FOR_WORDPRESS
 - name: INSTALL PYTHON-PIP
-      yum:
-        name: python-pip
-        state: latest
+  yum:
+    name: python-pip
+    state: latest
 
 - name: MAKE SURE PYMYSQL IS PRESENT
   become: true # needed if the other tasks are not played as root
